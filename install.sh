@@ -84,8 +84,6 @@ getSysInfo() {
 
 }
 
-getSysInfo
-
 # CURL
 
 curl() {
@@ -181,6 +179,8 @@ scrUpgrade() {
 # main 函数
 
 main () {
+    mkdir -p "$path"
+    getSysInfo
     scrUpgrade
     if [ "$FORCE" == true ]
     then
