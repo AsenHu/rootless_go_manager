@@ -24,7 +24,9 @@ help                      显示帮助（别名：-h|--help）
 
 ## 脚本输出
 
-- SCRIPT:GO 路径:GO 版本
-- BOTH:脚本 GO 路径:脚本 GO 版本:系统 GO 版本
-- SYSTEM:GO 版本
-- ERROR:错误原因
+```
+SCRIPT:<GO 路径>:<GO 版本>
+BOTH:<脚本 GO 路径>:<脚本 GO 版本>:<系统 GO 版本>
+SYSTEM:<GO 版本>
+ERROR:<错误原因>
+```
