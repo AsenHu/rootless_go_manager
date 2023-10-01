@@ -109,6 +109,7 @@ install_go() {
         rm -rf "$goScrPath/go" # && echo -e "DEBUG: Deleted current GO"
         tar -C "$goScrPath" -xzf "$goScrPath/tmp/go.tar.gz" # && echo -e "DEBUG: Replaced GO"
         rm "$goScrPath/tmp/go.tar.gz"
+        "$goScrPath/go/bin/go" env -w "GOPATH=$goScrPath/go"
     else
         echo "ERROR:The architecture is not supported. Try to install go by yourself."
         exit 1
@@ -127,7 +128,7 @@ getGoVersion() {
 # 版本输出函数
 
 scrVer() {
-    echo "1.0.2"
+    echo "1.0.3"
     exit 0
 }
 
