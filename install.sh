@@ -14,7 +14,7 @@ then
     exit 1
 fi
 
-path="$HOME/GO"
+goScrPath="$HOME/GO"
 
 getSysInfo() {
 
@@ -78,8 +78,8 @@ getSysInfo() {
 
     # 获取脚本安装 go 版本
 
-    scrGoVer=$("$path/go/bin/go" version | sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p')
-    if ! "$path/go/bin/go" version > /dev/null
+    scrGoVer=$("$goScrPath/go/bin/go" version | sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p')
+    if ! "$goScrPath/go/bin/go" version > /dev/null
     then
         scrGoVer=false
     fi
@@ -103,12 +103,12 @@ curl() {
 install_go() {
     getGoVersion
     if [[ $MACHINE == amd64 ]] || [[ $MACHINE == arm64 ]] || [[ $MACHINE == armv6l ]] || [[ $MACHINE == 386 ]]; then
-        mkdir -p "$path/tmp"
-        rm "$path/tmp/go.tar.gz"
-        curl -o "$path/tmp/go.tar.gz" "https://go.dev/dl/go$GO_VERSION.linux-$MACHINE.tar.gz"
-        rm -rf "$path/go" # && echo -e "DEBUG: Deleted current GO"
-        tar -C "$path" -xzf "$path/tmp/go.tar.gz" # && echo -e "DEBUG: Replaced GO"
-        rm "$path/tmp/go.tar.gz"
+        mkdir -p "$goScrPath/tmp"
+        rm "$goScrPath/tmp/go.tar.gz"
+        curl -o "$goScrPath/tmp/go.tar.gz" "https://go.dev/dl/go$GO_VERSION.linux-$MACHINE.tar.gz"
+        rm -rf "$goScrPath/go" # && echo -e "DEBUG: Deleted current GO"
+        tar -C "$goScrPath" -xzf "$goScrPath/tmp/go.tar.gz" # && echo -e "DEBUG: Replaced GO"
+        rm "$goScrPath/tmp/go.tar.gz"
     else
         echo "ERROR:The architecture is not supported. Try to install go by yourself."
         exit 1
@@ -127,25 +127,25 @@ getGoVersion() {
 # 版本输出函数
 
 scrVer() {
-    echo "1.0.0"
+    echo "1.0.2"
     exit 0
 }
 
 # 输出 GO 版本
 
 echoGoVer() {
-    if [ "$sysGoVer" ]
+    if [ "$sysGoVer" != false ]
     then
-        if [ "$scrGoVer" ]
+        if [ "$scrGoVer" != false ]
         then
-            echo "BOTH:$path/go/bin/go:$scrGoVer:$sysGoVer"
+            echo "BOTH:$goScrPath/go/bin/go:$scrGoVer:$sysGoVer"
         else
             echo "SYSTEM:$sysGoVer"
         fi
     else
-        if [ "$scrGoVer" ]
+        if [ "$scrGoVer" != false ]
         then
-            echo "SCRIPT:$path/go/bin/go:$scrGoVer"
+            echo "SCRIPT:$goScrPath/go/bin/go:$scrGoVer"
         else
             echo "ERROR:unexpected error"
         fi
@@ -170,18 +170,18 @@ checkGoUpdate() {
 scrUpgrade() {
     local latScrVer locScrVer
     latScrVer=$(curl https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/version.txt)
-    locScrVer=$("$path/install.sh" version)
+    locScrVer=$("$goScrPath/install.sh" version)
     if [ "$latScrVer" != "$locScrVer" ]
     then
-        curl -o "$path/install.sh" "https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/install.sh"
-        chmod +x "$path/install.sh"
+        curl -o "$goScrPath/install.sh" "https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/install.sh"
+        chmod +x "$goScrPath/install.sh"
     fi
 }
 
 # main 函数
 
 main () {
-    mkdir -p "$path"
+    mkdir -p "$goScrPath"
     getSysInfo
     scrUpgrade
     if [ "$FORCE" == true ]
@@ -236,7 +236,7 @@ for arg in "$@"; do
       FORCE=true
       ;;
     --path=*)
-      path="${arg#*=}"
+      goScrPath="${arg#*=}"
       ;;
     install)
       INSTALL=true
