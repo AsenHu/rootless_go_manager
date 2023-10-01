@@ -70,14 +70,16 @@ getSysInfo() {
 
     # 获取系统 go 版本
 
-    if ! sysGoVer=$(go version | sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p')
+    sysGoVer=$(go version | sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p')
+    if ! go version > /dev/null
     then
         sysGoVer=false
     fi
 
     # 获取脚本安装 go 版本
 
-    if ! scrGoVer=$("$path/go/bin/go" version | sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p')
+    scrGoVer=$("$path/go/bin/go" version | sed -n 's/.*\([0-9]\+\.[0-9]\+\.[0-9]\+\).*/\1/p')
+    if ! "$path/go/bin/go" version > /dev/null
     then
         scrGoVer=false
     fi
@@ -125,7 +127,7 @@ getGoVersion() {
 # 版本输出函数
 
 scrVer() {
-    echo "1.0.1"
+    echo "1.0.0"
     exit 0
 }
 
@@ -136,14 +138,14 @@ echoGoVer() {
     then
         if [ "$scrGoVer" ]
         then
-            echo "BOTH:$HOME/GO/go/bin/go:$scrGoVer:$sysGoVer"
+            echo "BOTH:$path/go/bin/go:$scrGoVer:$sysGoVer"
         else
             echo "SYSTEM:$sysGoVer"
         fi
     else
         if [ "$scrGoVer" ]
         then
-            echo "SCRIPT:$HOME/GO/go/bin/go:$scrGoVer"
+            echo "SCRIPT:$path/go/bin/go:$scrGoVer"
         else
             echo "ERROR:unexpected error"
         fi
@@ -166,7 +168,6 @@ checkGoUpdate() {
 # 脚本安装 & 更新
 
 scrUpgrade() {
-    touch "$path/install.sh"
     local latScrVer locScrVer
     latScrVer=$(curl https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/version.txt)
     locScrVer=$("$path/install.sh" version)
