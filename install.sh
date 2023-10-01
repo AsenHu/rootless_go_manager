@@ -174,6 +174,7 @@ scrUpgrade() {
     if [ "$latScrVer" != "$locScrVer" ]
     then
         curl -o "$path/install.sh" "https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/install.sh"
+        chmod +x "$path/install.sh"
     fi
 }
 
