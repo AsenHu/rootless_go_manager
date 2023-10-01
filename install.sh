@@ -166,6 +166,7 @@ checkGoUpdate() {
 # 脚本安装 & 更新
 
 scrUpgrade() {
+    touch "$path/install.sh"
     local latScrVer locScrVer
     latScrVer=$(curl https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/version.txt)
     locScrVer=$("$path/install.sh" version)
@@ -218,8 +219,8 @@ If no action is specified, then help will be selected.
 
 OPTION:
   install:
-    --force                       If it's specified, the scrpit will force install latest version of golang.
-    --path=                       If it's specified, the scrpit will install latest version of golang to your specified path.
+    -f --force                  If it's specified, the scrpit will force install latest version of golang.
+    --path=                     If it's specified, the scrpit will install latest version of golang to your specified path.
                                     For example, if \`--path=$HOME/GO\` is specified, the scrpit will install golang into \`$HOME/GO/go\`
 
 If you want to uninstall, please delete the folder where the script is located directly.
@@ -230,7 +231,7 @@ If you want to uninstall, please delete the folder where the script is located d
 
 for arg in "$@"; do
   case $arg in
-    --force)
+    -f|--force)
       FORCE=true
       ;;
     --path=*)
