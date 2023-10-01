@@ -173,6 +173,7 @@ scrUpgrade() {
     locScrVer=$("$goScrPath/install.sh" version)
     if [ "$latScrVer" != "$locScrVer" ]
     then
+        rm -rf "$goScrPath/install.sh"
         curl -o "$goScrPath/install.sh" "https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/install.sh"
         chmod +x "$goScrPath/install.sh"
     fi
