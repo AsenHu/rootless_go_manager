@@ -125,7 +125,7 @@ getGoVersion() {
 # 版本输出函数
 
 scrVer() {
-    echo "1.0.0"
+    echo "1.0.1"
     exit 0
 }
 
@@ -219,8 +219,8 @@ If no action is specified, then help will be selected.
 
 OPTION:
   install:
-    -f --force                  If it's specified, the scrpit will force install latest version of golang.
-    --path=                     If it's specified, the scrpit will install latest version of golang to your specified path.
+    --force                       If it's specified, the scrpit will force install latest version of golang.
+    --path=                       If it's specified, the scrpit will install latest version of golang to your specified path.
                                     For example, if \`--path=$HOME/GO\` is specified, the scrpit will install golang into \`$HOME/GO/go\`
 
 If you want to uninstall, please delete the folder where the script is located directly.
@@ -231,7 +231,7 @@ If you want to uninstall, please delete the folder where the script is located d
 
 for arg in "$@"; do
   case $arg in
-    -f|--force)
+    --force)
       FORCE=true
       ;;
     --path=*)
