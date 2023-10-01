@@ -4,6 +4,12 @@
 
 ## 脚本用法
 
+从网络执行本脚本
+```
+bash <(curl https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/install.sh) @ install
+```
+下一次执行使用 ~/GO/install.sh 即可
+
 ```
 用法：install.sh 操作 [选项]...
 
