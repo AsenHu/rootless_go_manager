@@ -127,7 +127,7 @@ getGoVersion() {
 # 版本输出函数
 
 scrVer() {
-    echo "1.0.4"
+    echo "1.0.5"
     exit 0
 }
 
@@ -203,6 +203,7 @@ main () {
         fi
     fi
     "$goScrPath/go/bin/go" env -w "GOPATH=$goScrPath/go"
+    "$goScrPath/go/bin/go" env -w "CGO_ENABLED=1"
     echoGoVer
 }
 
