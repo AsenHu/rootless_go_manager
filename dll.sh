@@ -32,6 +32,6 @@ install_go_scr() {
     then
         goPath=$(echo "$tmp" |cut -d':' -f2)
         goVer=$(echo "$tmp" |cut -d':' -f3)
-        PATH="$PATH:$goPath"
+        PATH="$PATH:$GO_PATH/bin"
     fi
 }
