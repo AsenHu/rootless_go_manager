@@ -10,6 +10,8 @@ bash <(curl https://raw.githubusercontent.com/AsenHu/rootless_go_manager/main/in
 ```
 下一次执行使用 ~/GO/install.sh 即可
 
+记得自己安装 curl
+
 ```
 用法：install.sh 操作 [选项]...
 
