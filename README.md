@@ -1,3 +1,6 @@
+https://github.com/chise0713/go-install
+打算给这个项目 pr，全部自己搓太累了
+
 # rootless_go_manager
 
 一个面向软件的无需 root 的 golang 安装 + 更新脚本
