@@ -1,5 +1,6 @@
-https://github.com/chise0713/go-install
-打算给这个项目 pr，全部自己搓太累了
+我有一个问题
+
+我们真的需要在本地编译程序吗？
 
 # rootless_go_manager
 
